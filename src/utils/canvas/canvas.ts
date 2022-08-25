@@ -30,15 +30,15 @@ export class Canvas implements IAwake {
     this._ctx = ctx
   }
 
+  public ClearRect(start: Vector2D, size: Vector2D): void {
+    this._ctx.clearRect(start.x, start.y, size.x, size.y)
+  }
+
   public FillRect(start: Vector2D, size: Vector2D, color: Color): void {
     this._ctx.beginPath()
     this._ctx.fillStyle = color.AsString()
     this._ctx.rect(start.x, start.y, size.x, size.y)
     this._ctx.fill()
-  }
-
-  public ClearRect(start: Vector2D, size: Vector2D): void {
-    this._ctx.clearRect(start.x, start.y, size.x, size.y)
   }
 
   public FillCircle(center: Vector2D, radius: number, color: Color): void {
