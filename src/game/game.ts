@@ -3,8 +3,11 @@ import { Entity } from '@/utils'
 
 export class Game extends Entity {
   private _lastTimestamp = 0
+  private _entities: Entity[] = []
 
-  public Entities: Entity[] = []
+  public get Entities(): Entity[] {
+    return this._entities
+  }
 
   public Awake(): void {
     super.Awake()
