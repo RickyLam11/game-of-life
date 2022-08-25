@@ -48,6 +48,15 @@ export class Canvas implements IAwake {
     this._ctx.fill()
   }
 
+  public strokeLine(start: Vector2D, end: Vector2D, lineWidth: number, color: Color): void {
+    this._ctx.beginPath()
+    this._ctx.lineWidth = lineWidth
+    this._ctx.moveTo(start.x, start.y)
+    this._ctx.lineTo(end.x, end.y)
+    this._ctx.strokeStyle = color.AsString()
+    this._ctx.stroke()
+  }
+
   public SetStyle(style: Partial<CSSStyleDeclaration>): void {
     for (const key in style) {
       if (!Object.prototype.hasOwnProperty.call(style, key)) {

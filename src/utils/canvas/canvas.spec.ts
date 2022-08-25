@@ -74,6 +74,24 @@ describe('>>> Canvas', () => {
       expect(canvas.Context.fillStyle).toBe('#ffffff')
     })
 
+    it('should draw a line', () => {
+      const start = new Vector2D(10, 10)
+      const end = new Vector2D(123, 456)
+      const width = 2
+
+      const spyBeginPath = jest.spyOn(canvas.Context, 'beginPath')
+      const spyMove = jest.spyOn(canvas.Context, 'moveTo')
+      const spyLine = jest.spyOn(canvas.Context, 'lineTo')
+
+      canvas.strokeLine(start, end, width, new Color(255, 255, 255, 1))
+
+      expect(spyBeginPath).toBeCalled()
+      expect(spyMove).toBeCalledWith(start.x, start.y)
+      expect(spyLine).toBeCalledWith(end.x, end.y)
+      expect(canvas.Context.lineWidth).toBe(width)
+      expect(canvas.Context.strokeStyle).toBe('#ffffff')
+    })
+
     it('should set css style', () => {
       const zIndex = '1'
 
