@@ -11,17 +11,18 @@ export class Grid extends Entity {
     )
 
     this.drawGrid()
+    this.DrawGrid()
   }
 
   public Update(deltaTime: number): void {
     /* */
   }
 
-  private drawGrid(): void {
-    const nodeXCount = Math.ceil(window.innerWidth / Settings.grid.node.size)
-    const nodeYCount = Math.ceil(window.innerHeight / Settings.grid.node.size)
+  private DrawGrid(): void {
+    const columnCount = Math.ceil(window.innerWidth / Settings.grid.node.size)
+    const rowCount = Math.ceil(window.innerHeight / Settings.grid.node.size)
 
-    for (let i = 1; i < nodeXCount; i++) {
+    for (let i = 1; i < columnCount; i++) {
       const x = i * Settings.grid.node.size
       CanvasLayer.Background.strokeLine(
         new Vector2D(x, 0),
@@ -31,7 +32,7 @@ export class Grid extends Entity {
       )
     }
 
-    for (let j = 1; j < nodeYCount; j++) {
+    for (let j = 1; j < rowCount; j++) {
       const y = j * Settings.grid.node.size
       CanvasLayer.Background.strokeLine(
         new Vector2D(0, y),
