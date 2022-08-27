@@ -20,7 +20,7 @@ export class NodeDrawComponent implements IComponent {
   }
 
   private Draw(): void {
-    if (this.Entity.IsActive) {
+    if (this.Entity.IsAlive) {
       CanvasLayer.Foreground.FillRect(
         this.Entity.Start,
         this.Entity.Size,

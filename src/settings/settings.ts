@@ -14,5 +14,9 @@ export const Settings = Object.freeze({
       offset: 10,
       color: new Color(100, 240, 150, 1)
     },
+  },
+  rule: {
+    stayAlive: [2, 3],
+    revival: [3]
   }
 })

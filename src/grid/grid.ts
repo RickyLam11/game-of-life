@@ -4,7 +4,7 @@ import { Entity, Vector2D } from '@/utils'
 import { Node } from '@/node'
 
 export class Grid extends Entity {
-  private _board: boolean[][] = []
+  private _board: Node[][] = []
   private _nodes: Node[] = []
 
   public get Nodes(): Node[] {
@@ -19,6 +19,7 @@ export class Grid extends Entity {
 
     this.DrawGrid()
     this.InitBoardAndNode()
+    this.InitNodeNeighbours()
 
     // Awake child Entity (Node)
     for (const node of this.Nodes) {
@@ -29,8 +30,6 @@ export class Grid extends Entity {
   public Update(deltaTime: number): void {
     // Update components
     super.Update(deltaTime)
-
-    this.UpdateNodeActive()
 
     // Update child Entity (Node)
     for (const node of this.Nodes) {
@@ -88,15 +87,30 @@ export class Grid extends Entity {
         this.Nodes.push(node)
         node.IsActive = (Math.random() < 0.1)
         // board
-        row.push(node.IsActive)
+        row.push(node)
       }
       this._board.push(row)
     }
   }
 
-  private UpdateNodeActive(): void {
-    for (const node of this.Nodes) {
-      node.IsActive = (Math.random() < 0.1)
+  private InitNodeNeighbours(): void {
+    const rowCount = Math.ceil(window.innerHeight / Settings.grid.node.size)
+    const columnCount = Math.ceil(window.innerWidth / Settings.grid.node.size)
+
+    for (let i = 0; i < rowCount; i++) {
+      for (let j = 0; j < columnCount; j++) {
+        const node = this._board[i][j]
+
+        for (const m of [-1, 0, 1]) {
+          for (const n of [-1, 0, 1]) {
+            if (!(m === 0 && n === 0)) {
+              if (0 <= (i + m) && (i + m) < rowCount && 0 <= (j + n) && (j + n) < columnCount) {
+                node.AddNeighbours(this._board[i + m][j + n])
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
