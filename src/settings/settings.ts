@@ -1,6 +1,9 @@
 import { Color } from '@/utils'
 
 export const Settings = Object.freeze({
+  game: {
+    initialNodeRate: 0.5,
+  },
   grid: {
     background: {
       color: new Color(51, 51, 51, 1),

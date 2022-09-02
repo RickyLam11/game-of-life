@@ -85,7 +85,7 @@ export class Grid extends Entity {
 
         const node = new Node(start, end, index)
         this.Nodes.push(node)
-        node.IsActive = (Math.random() < 0.1)
+        node.IsAlive = (Math.random() < Settings.game.initialNodeRate)
         // board
         row.push(node)
       }
