@@ -14,7 +14,7 @@ export class Node extends Entity {
     )
   }
 
-  public get Neighbours() {
+  public get Neighbours(): Node[] {
     return this._neighbours
   }
 
@@ -38,13 +38,11 @@ export class Node extends Entity {
   }
 
   public Update(deltaTime: number): void {
-    this.UpdateNextCycle()
-
     // call parent Awake to awake components
     super.Update(deltaTime)
   }
 
-  private UpdateNextCycle(): void {
+  public CalculateNextCycle(): boolean {
     let count = 0
     for (const node of this.Neighbours) {
       count += (node.IsAlive) ? 1 : 0
@@ -52,12 +50,12 @@ export class Node extends Entity {
 
     if (!this.IsAlive && Settings.rule.revival.includes(count)) {
       // cell is NOT alive
-      this.IsAlive = true
+      return true
     } else if (this.IsAlive && Settings.rule.stayAlive.includes(count)) {
       // cell is alive
-      this.IsAlive = true
+      return true
     } else {
-      this.IsAlive = false
+      return false
     }
   }
 }
