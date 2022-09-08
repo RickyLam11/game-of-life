@@ -5,7 +5,7 @@ import { NodeDrawComponent } from './components'
 export class Node extends Entity {
   private _neighbours: Node[] = []
 
-  public IsAlive: boolean
+  public IsAlive = false
 
   public get Size(): Vector2D {
     return new Vector2D(
